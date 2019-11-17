@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -22,6 +23,7 @@ func main() {
 
 	r := mux.NewRouter()
 
+	// tmpl := template.Must(template.ParseFiles("./views/todos/index.html"))
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, Hello())
 	})
@@ -34,28 +36,29 @@ func main() {
 		fmt.Fprintf(w, "Hello Myname: %s %s", fname, lname)
 	})
 
-	r.HandleFunc("/todos", func(w Http.ResponseWriter, r *Http.Request){
+	r.HandleFunc("/todos", func(w http.ResponseWriter, r *http.Request) {
 
 		/* Step and Requirment Preparing
-			1. Data
-			2. Template 
-			3. render
+		1. Template
+		2. Data
+		3. Render
 		*/
-		
 
-		// Data for dis
+		//Template
+		tmpl := template.Must(template.ParseFiles("./views/todos/index.html"))
+		// Data for display
 		data := TodoPageList{
 			PageTitle: "Todos List",
 			Todos: []Todo{
-				{ Title: "Go Web Learning", Done: true },
-				{ Title: "Go by TDD", Done: false },
-				{ Title: "Go CLI", Done: false },
-			}
-		} 
+				{Title: "Go Web Learning", Done: true},
+				{Title: "Go by TDD", Done: false},
+				{Title: "Go CLI", Done: false},
+			},
+		}
 
-		
+		tmpl.Execute(w, data)
 
-	}) 
+	})
 
 	// bookrouter := r.PathPrefix("/books").Subrouter()
 	// bookrouter.HandleFunc("/", AllBooks)
