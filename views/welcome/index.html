@@ -11,7 +11,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-
     <style>
       body {
         min-height: 75rem;
@@ -33,11 +32,12 @@
         }
       }
     </style>
-
-    <title>F2 Todos List</title>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="./assets/css/navbar-top-fixed.css" />
   </head>
+
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-5">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">F2Code</a>
       <button
         class="navbar-toggler"
@@ -50,6 +50,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -87,30 +88,21 @@
 
     <main role="main" class="container">
       <div class="mt-5">
-      <div class="jumbotron">
-        <h1>My Goal of Go</h1>
-        <p class="lead">
-          Learning Go fundamental by "Learing go with testing (TDD)" and will develope Personal Web Port Folio, and my final Goal is Create my 1st Web Framework inspiration by "Ruby on Rails".  
-        </p>
-        <a
-          class="btn btn-lg btn-primary"
-          href="/docs/4.3/components/navbar/"
-          role="button"
-          >My Go Miles</a
-        >
+        <div class="jumbotron">
+          <h1>Welcome to F2Code</h1>
+          <p class="lead">
+            This example is a quick exercise to illustrate how fixed to top
+            navbar works. As you scroll, it will remain fixed to the top of your
+            browser’s viewport.
+          </p>
+          <a
+            class="btn btn-lg btn-primary"
+            href="/docs/4.3/components/navbar/"
+            role="button"
+            >View navbar docs &raquo;</a
+          >
+        </div>
       </div>
-      </div>
-
-      <div class="mt5">
-        <h1>{{ .PageTitle }}</h1>
-        <ul>
-          {{ range .Todos}} {{if .Done}}
-          <li class="done">{{.Title}}</li>
-          {{else}}
-          <li>{{.Title}}</li>
-          {{end}} {{end}}
-        </ul>
-      </divdiv>
     </main>
     <div class="footer text-center mt-5">
       <div class="container-fluid">
@@ -119,7 +111,6 @@
     </div>
 
     <!-- bootstrap js dependencies -->
-
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

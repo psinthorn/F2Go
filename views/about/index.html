@@ -36,6 +36,7 @@
 
     <title>F2 Todos List</title>
   </head>
+
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-5">
       <a class="navbar-brand" href="#">F2Code</a>
@@ -87,31 +88,31 @@
 
     <main role="main" class="container">
       <div class="mt-5">
-      <div class="jumbotron">
-        <h1>My Goal of Go</h1>
-        <p class="lead">
-          Learning Go fundamental by "Learing go with testing (TDD)" and will develope Personal Web Port Folio, and my final Goal is Create my 1st Web Framework inspiration by "Ruby on Rails".  
-        </p>
-        <a
-          class="btn btn-lg btn-primary"
-          href="/docs/4.3/components/navbar/"
-          role="button"
-          >My Go Miles</a
-        >
-      </div>
-      </div>
-
-      <div class="mt5">
-        <h1>{{ .PageTitle }}</h1>
-        <ul>
-          {{ range .Todos}} {{if .Done}}
-          <li class="done">{{.Title}}</li>
+        <div class="jumbotron">
+          {{ if .Status }}
+          <h1>{{.Title}}</h1>
+          <p class="lead">
+            {{.Body}}
+          </p>
+          <a
+            class="btn btn-lg btn-primary"
+            href="/docs/4.3/components/navbar/"
+            role="button"
+          >
+            Find out More on Our Service and Product
+          </a>
           {{else}}
-          <li>{{.Title}}</li>
-          {{end}} {{end}}
-        </ul>
-      </divdiv>
+          <h1>!Oops Nothing Here</h1>
+          <p class="mt-5">
+            <a class="btn btn-lg btn-primary" href="/" role="button">
+              Back to Start -> Welcome
+            </a>
+          </p>
+          {{end}}
+        </div>
+      </div>
     </main>
+
     <div class="footer text-center mt-5">
       <div class="container-fluid">
         <div class="col-sm-12 small">copyright F2Code 2019</div>

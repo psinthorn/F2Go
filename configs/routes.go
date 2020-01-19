@@ -1,24 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-func main() {
+func HandleRoutes() {
 	r := mux.NewRouter()
+	r.HandleFunc("/", WelcomeIndex)
+	r.HandleFunc("/user/{fname}/{lname}", UserIndex)
+	r.HandleFunc("/todos", TodoIndex)
+	r.HandleFunc("/about", AboutIndex)
+	r.HandleFunc("/contact", ContactIndex)
+	r.HandleFunc("/version", VersionIndex)
+	fs := http.FileServer(http.Dir("assets/"))
+	http.Handle("/static", http.StripPrefix("/static", fs))
 
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello F2Code")
-	})
-
-	r.HandleFunc("/user/{fname}/{lname}", func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
-		fname := vars["fname"]
-		lname := vars["lname"]
-
-		fmt.Fprintf(w, "Hello Myname: %s %s", fname, lname)
-	})
+	//http.ListenAndServe(":8008", r)
+	err := http.ListenAndServe(":8008", r)
+	if err != nil {
+		log.Fatal("ListenAndServe:8008", err)
+	}
 }
