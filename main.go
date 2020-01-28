@@ -66,9 +66,9 @@ func HandleRoutes() {
 	}
 }
 
-func Hello() string {
-	return "Hello F2Code"
-}
+// func Hello() string {
+// 	return "Hello F2Code"
+// }
 
 //Welcome Index Page
 func WelcomeIndex(w http.ResponseWriter, r *http.Request) {
