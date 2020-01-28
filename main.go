@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -48,6 +49,7 @@ func main() {
 }
 
 func HandleRoutes() {
+	port := os.Getenv("PORT")
 	r := mux.NewRouter()
 	r.HandleFunc("/", WelcomeIndex)
 	r.HandleFunc("/user/{fname}/{lname}", UserIndex)
@@ -55,14 +57,12 @@ func HandleRoutes() {
 	r.HandleFunc("/about", AboutIndex)
 	r.HandleFunc("/contact", ContactIndex)
 	r.HandleFunc("/version", VersionIndex)
-	fs := http.FileServer(http.Dir("assets/"))
-	http.Handle("/", http.StripPrefix("/static", fs))
 
 	//http.ListenAndServe(":8008", r)
-	err := http.ListenAndServe(":8008", r)
-	fmt.Println("Server running on 8008")
+	err := http.ListenAndServe(":"+port, r)
+	fmt.Println("Server running on " + port)
 	if err != nil {
-		log.Fatal("ListenAndServe:8008", err)
+		log.Fatal("ListenAndServe:"+port, err)
 	}
 }
 
