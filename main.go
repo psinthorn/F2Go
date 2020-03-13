@@ -29,6 +29,19 @@ type ContentDefault struct {
 	Status   bool
 }
 
+type Contact struct {
+	Title    string
+	SubTitle string
+	Body     string
+	SubBody  string
+	Email    string
+	LineId   string
+	Facebook string
+	mobile   string
+	website  string
+	Status   bool
+}
+
 type GoMileVersion struct {
 	Version    ContentDefault
 	ChangeLogs []ContentDefault
@@ -41,14 +54,14 @@ var tmpl *template.Template
 // }
 
 func main() {
-	// fs := http.FileServer(http.Dir("assets/"))
-	// http.Handle("/static/", http.StripPrefix("/static/", fs))
-	//dir, _ := os.Getwd()
+	// Set PORT for local env
+	os.Setenv("PORT", "8008")
 
 	HandleRoutes()
 }
 
 func HandleRoutes() {
+	// Port := "8008"
 	port := os.Getenv("PORT")
 	r := mux.NewRouter()
 	r.HandleFunc("/", WelcomeIndex)
@@ -58,12 +71,12 @@ func HandleRoutes() {
 	r.HandleFunc("/contact", ContactIndex)
 	r.HandleFunc("/version", VersionIndex)
 
-	//http.ListenAndServe(":8008", r)
-	err := http.ListenAndServe(":"+port, r)
 	fmt.Println("Server running on " + port)
+	err := http.ListenAndServe(":"+port, r)
 	if err != nil {
 		log.Fatal("ListenAndServe:"+port, err)
 	}
+
 }
 
 // func Hello() string {
@@ -123,7 +136,7 @@ func AboutIndex(w http.ResponseWriter, r *http.Request) {
 		Title:    "About",
 		SubTitle: "F2 BIO",
 		Body:     "F2 modern technology company provide Technology service & support include Network, Programming, iOT and products related",
-		SubBody:  "Trouble shooting by Remote destop service on one of our specialist ",
+		SubBody:  "Trouble shooting by Remote destop service is one of our specialist ",
 		Status:   true,
 	}
 	//Use template
@@ -134,7 +147,7 @@ func AboutIndex(w http.ResponseWriter, r *http.Request) {
 func ContactIndex(w http.ResponseWriter, r *http.Request) {
 	data := ContentDefault{
 		Title:    "Contact Me",
-		SubTitle: "I'am open on oppotunities , On Golang Language project",
+		SubTitle: "F2 Co.,Ltd.",
 		Body: `My name is Sinthorn Pradutnam
 				Email: psinthorn@gmail.com
 				LineID: sinthorn83
