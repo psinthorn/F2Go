@@ -1,5 +1,6 @@
 package models
 
+
 	data := GoMileVersion{
 		Version: ContentDefault{
 			//Version format version.ddmmyy

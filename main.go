@@ -2,19 +2,8 @@ package main
 
 import "github.com/psinthorn/F2Go/app"
 
-// Data type preparing
-
-// var tmpl *template.Template
-
-// func init(){
-// 	tmpl = template.Must(template.ParseGlob("./views/welcome/*.html"))
-// }
-
 func main() {
-	// Set PORT for local env
-	// Comment this line when you production
-	//os.Setenv("PORT", "8008")
-
+	//Start app
 	app.StartApp()
 }
 
