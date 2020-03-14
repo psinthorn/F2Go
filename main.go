@@ -55,7 +55,7 @@ var tmpl *template.Template
 
 func main() {
 	// Set PORT for local env
-	os.Setenv("PORT", "8008")
+	//os.Setenv("PORT", "8008")
 
 	HandleRoutes()
 }
