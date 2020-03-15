@@ -96,9 +96,16 @@
         <div class="jumbotron">
           {{ if .Status }}
           <h1>{{.Title}}</h1>
+          <p class="lead"><br />{{.Body}}</p>
           <p class="lead">
-            {{.Body}}
+            <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
+            <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
+            <br />Website:
+            <a href="{{.Website}}" target="_blank">{{.Website}}</a>
           </p>
+
+          <p class="lead"></p>
+
           <br />
           <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
             Email Me
