@@ -17,7 +17,7 @@ func ContactIndex(res http.ResponseWriter, req *http.Request) {
 		Email:     "psinthorn@gmail.com",
 		LineId:    "sinthorn83",
 		Instagram: "sinthorn",
-		Facebook:  "fb.me/f2coltd",
+		Facebook:  "https://fb.me/f2coltd",
 		Mobile:    "0989358228",
 		Website:   "https://www.f2.co.th",
 		Status:    true,
