@@ -14,7 +14,7 @@ func StartApp() {
 	port := os.Getenv("PORT")
 
 	http.HandleFunc("/", controllers.WelcomeIndex)
-	// http.HandleFunc("/users", controllers.GetUser)
+	http.HandleFunc("/users", controllers.GetUser)
 	http.HandleFunc("/contact", controllers.ContactIndex)
 	//http.ListenAndServe(":8080", nil)
 
