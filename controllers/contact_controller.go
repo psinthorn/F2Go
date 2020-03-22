@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"html/template"
 	"net/http"
 	"strconv"
 
@@ -33,11 +34,11 @@ func ContactIndex(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// if call api return json data to client
-	contactJson, _ := json.Marshal(data)
-	res.Write(contactJson)
+	// // if call api return json data to client
+	// contactJson, _ := json.Marshal(data)
+	// res.Write(contactJson)
 
-	// // if normal path return html views to client
-	// tmpl := template.Must(template.ParseFiles("./views/contact/index.html"))
-	// tmpl.Execute(res, data)
+	// if normal path return html views to client
+	tmpl := template.Must(template.ParseFiles("./views/contact/index.html"))
+	tmpl.Execute(res, data)
 }
