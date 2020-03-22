@@ -1,4 +1,4 @@
-package models
+package domain
 
 // var (
 // 	data = GoMileVersion{

@@ -1,10 +1,10 @@
 package services
 
 import (
-	"github.com/psinthorn/F2Go/models"
+	"github.com/psinthorn/F2Go/domain"
 	"github.com/psinthorn/F2Go/utils"
 )
 
-func GetContact(id int64) (*models.Contact, *utils.ApplicationError) {
-	return models.GetContact(id)
+func GetContact(id int64) (*domain.Contact, *utils.ApplicationError) {
+	return domain.GetContact(id)
 }
