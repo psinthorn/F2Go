@@ -5,6 +5,6 @@ import (
 	"github.com/psinthorn/F2Go/utils"
 )
 
-func GetUser(userId int64) (*models.User, *utils.ApplicationError) {
-	return models.GetUser(userId)
+func GetContact(id int64) (*models.Contact, *utils.ApplicationError) {
+	return models.GetContact(id)
 }

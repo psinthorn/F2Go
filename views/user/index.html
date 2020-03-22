@@ -34,7 +34,7 @@
       }
     </style>
 
-    <title>F2 Contact</title>
+    <title>F2 User</title>
   </head>
 
   <body>
@@ -95,16 +95,9 @@
       <div class="mt-5">
         <div class="jumbotron">
           {{ if .Status }}
-          <h1>{{.Title}}</h1>
-          <p class="lead"><br />{{.Body}}</p>
-          <p class="lead">
-            <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
-            <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
-            <br />Website:
-            <a href="{{.Website}}" target="_blank">{{.Website}}</a>
-            <br />Mobile:
-            <a href="tel:{{.Mobile}}" target="_blank">{{.Mobile}}</a>
-          </p>
+          <h1>{{.FirstName}} {{.LastName}}</h1>
+
+          <p class="lead"><br />Email: {{.Email}} <br /></p>
 
           <p class="lead"></p>
 

@@ -10,7 +10,7 @@ import (
 )
 
 func StartApp() {
-	//os.Setenv("PORT", "8009")
+	os.Setenv("PORT", "8009")
 	port := os.Getenv("PORT")
 
 	http.HandleFunc("/", controllers.WelcomeIndex)

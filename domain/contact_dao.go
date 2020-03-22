@@ -1,7 +1,14 @@
 package models
 
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/psinthorn/F2Go/utils"
+)
+
 var (
-	contactDao = map[int64]*Contact{
+	contacts = map[int64]*Contact{
 		1: {Id: 1,
 			Title:     "Contact Us",
 			SubTitle:  "F2 Co.,Ltd.",
@@ -16,3 +23,15 @@ var (
 			Status:    true},
 	}
 )
+
+func GetContact(id int64) (*Contact, *utils.ApplicationError) {
+	if contact := contacts[id]; contact != nil {
+		return contact, nil
+	}
+
+	return nil, &utils.ApplicationError{
+		Message:    fmt.Sprintf("contact_id %v not found", id),
+		StatusCode: http.StatusNotFound,
+		Code:       "not_found",
+	}
+}

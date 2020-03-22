@@ -1,27 +1,43 @@
 package controllers
 
 import (
-	"html/template"
+	"encoding/json"
 	"net/http"
+	"strconv"
 
-	"github.com/psinthorn/F2Go/models"
+	"github.com/psinthorn/F2Go/services"
+	"github.com/psinthorn/F2Go/utils"
 )
 
 func ContactIndex(res http.ResponseWriter, req *http.Request) {
-	data := &models.Contact{
-		Id:        1,
-		Title:     "Contact Us",
-		SubTitle:  "F2 Co.,Ltd.",
-		Body:      "Contact F2 with below infomation and we will reply you within 24 hrs.",
-		SubBody:   "",
-		Email:     "psinthorn@gmail.com",
-		LineId:    "sinthorn83",
-		Instagram: "sinthorn",
-		Facebook:  "https://fb.me/f2coltd",
-		Mobile:    "0989358228",
-		Website:   "https://www.f2.co.th",
-		Status:    true,
+
+	id, err := strconv.ParseInt(req.URL.Query().Get("id"), 10, 64)
+	if err != nil {
+		appError := &utils.ApplicationError{
+			Message:    "contact_id must be an integer",
+			StatusCode: http.StatusBadRequest,
+			Code:       "bad_request",
+		}
+		data, _ := json.Marshal(appError)
+		res.WriteHeader(appError.StatusCode)
+		res.Write(data)
+		return
 	}
-	tmpl := template.Must(template.ParseFiles("./views/contact/index.html"))
-	tmpl.Execute(res, data)
+
+	data, appError := services.GetContact(id)
+
+	if appError != nil {
+		data, _ := json.Marshal(appError)
+		res.WriteHeader(appError.StatusCode)
+		res.Write(data)
+		return
+	}
+
+	// if call api return json data to client
+	contactJson, _ := json.Marshal(data)
+	res.Write(contactJson)
+
+	// // if normal path return html views to client
+	// tmpl := template.Must(template.ParseFiles("./views/contact/index.html"))
+	// tmpl.Execute(res, data)
 }
