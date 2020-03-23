@@ -10,8 +10,12 @@ import (
 )
 
 func StartApp() {
-	// os.Setenv("PORT", "8009")
+	// Get port from env in case production
+	// if test run on localhost we need to manual port for system can start to run.
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8009"
+	}
 
 	http.HandleFunc("/", controllers.WelcomeIndex)
 	http.HandleFunc("/users", controllers.GetUser)
