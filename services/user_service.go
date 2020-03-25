@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/psinthorn/F2Go/domain"
+	domain "github.com/psinthorn/F2Go/domain/user"
 	"github.com/psinthorn/F2Go/utils"
 )
 
