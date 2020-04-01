@@ -3,9 +3,17 @@ package controllers
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 func AboutIndex(res http.ResponseWriter, req *http.Request) {
+	id, err := strconv.ParseInt(req.URL.Query().Get("id", 10, 64))
+
+	if err != nil {
+
+	}
+
+	return *services.GetAbout()
 
 	// data := *models.ContentDefault{
 	// 	Title:    "About",
