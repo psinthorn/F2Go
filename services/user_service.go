@@ -1,10 +1,14 @@
-package services
+package service
 
 import (
 	domain "github.com/psinthorn/F2Go/domain/user"
 	"github.com/psinthorn/F2Go/utils"
 )
 
-func GetUser(userId int64) (*domain.User, *utils.ApplicationError) {
-	return domain.GetUser(userId)
+type userService struct{}
+
+var UserService userService
+
+func (u *userService) GetUser(userId int64) (*domain.User, *utils.ApplicationError) {
+	return domain.UserDao.GetUser(userId)
 }

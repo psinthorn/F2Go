@@ -1,4 +1,4 @@
-package services
+package service
 
 import (
 	domain "github.com/psinthorn/F2Go/domain/contact"
