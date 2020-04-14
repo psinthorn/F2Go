@@ -15,7 +15,7 @@ var (
 		1: {Id: 1,
 			Title:    "About Us",
 			SubTitle: "About F2",
-			Body:     "F2 is modern technology service company  we're focus on web application, mobile and iOT services",
+			Body:     "F2 is modern technology service company  we're focus on web application mobile and iOT development and deployment service.",
 			SubBody:  "Web Hosting, Email and DNS Server is also our base service for more than 18 Years.",
 			Status:   true},
 	}
