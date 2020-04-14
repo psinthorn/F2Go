@@ -10,7 +10,7 @@ import (
 	"github.com/psinthorn/F2Go/utils"
 )
 
-func ContactIndex(res http.ResponseWriter, req *http.Request) {
+func GetContact(res http.ResponseWriter, req *http.Request) {
 
 	id, err := strconv.ParseInt(req.URL.Query().Get("id"), 10, 64)
 	if err != nil {
@@ -25,7 +25,7 @@ func ContactIndex(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	data, appError := services.GetContact(id)
+	data, appError := services.ContactService.GetContact(id)
 
 	if appError != nil {
 		data, _ := json.Marshal(appError)

@@ -17,9 +17,10 @@ func StartApp() {
 		port = "8009"
 	}
 
-	http.HandleFunc("/", controllers.WelcomeIndex)
+	http.HandleFunc("/about", controllers.GetAbout)
 	http.HandleFunc("/users", controllers.GetUser)
-	http.HandleFunc("/contact", controllers.ContactIndex)
+	http.HandleFunc("/contact", controllers.GetContact)
+	http.HandleFunc("/", controllers.GetWelcome)
 	//http.ListenAndServe(":8080", nil)
 
 	fmt.Println("Server running on " + port)

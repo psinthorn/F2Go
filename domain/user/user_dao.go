@@ -2,10 +2,13 @@ package domain
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/psinthorn/F2Go/utils"
 )
+
+type userDao struct{}
 
 var (
 	users = map[int64]*User{
@@ -15,9 +18,11 @@ var (
 			Email:     "psinthorn@gmail.com",
 			Status:    true},
 	}
+	UserDao userDao
 )
 
-func GetUser(userId int64) (*User, *utils.ApplicationError) {
+func (u *userDao) GetUser(userId int64) (*User, *utils.ApplicationError) {
+	log.Println("we're accessing user database")
 	if user := users[userId]; user != nil {
 		return user, nil
 	}

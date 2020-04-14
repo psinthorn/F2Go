@@ -11,6 +11,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+
     <style>
       body {
         min-height: 75rem;
@@ -32,13 +33,12 @@
         }
       }
     </style>
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="./assets/css/navbar-top-fixed.css" />
+
+    <title>{{.Title}}</title>
   </head>
 
   <body>
-    
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-5">
       <a class="navbar-brand" href="#">F2</a>
       <button
         class="navbar-toggler"
@@ -51,11 +51,10 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/"
+            <a class="nav-link" href="/?id=1"
               >Welcome <span class="sr-only">(current)</span></a
             >
           </li>
@@ -63,16 +62,19 @@
           <!-- <li class="nav-item">
             <a class="nav-link" href="/todos">Todos</a>
           </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="/contact?id=1">Contact Us</a>
+            <a class="nav-link" href="/about?id=1">About</a>
           </li>
-        </ul>
-        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/version">Version 1.0.0 22032020</a>
+            <a class="nav-link" href="/contact?id=1">Contact</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/version">Version</a>
+          </li> -->
+        </ul>
+        <ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/version">Version</a>
           </li>
         </ul>
         <!-- <form class="form-inline mt-2 mt-md-0">
@@ -91,52 +93,45 @@
 
     <main role="main" class="container">
       <div class="mt-5">
-        <div class="jumbotron p-5">
-          <div class="container">
-            
-            <h1 class="text-center">Welcome to F2 Co.,Ltd. Official Website</h1>
-           
-          <div class="container">
+        <div class="jumbotron">
+          {{ if .Status }}
+          <h1>{{.Title}}</h1>
           <p class="lead">
-            "Our Official website is on development if you can visit us daily to see
-            our website progress is will be great as we will continue development and update as
-            non-stop." <br />
-         <br>
+            {{.Body}}
+          </p>
+          {{end}}
+          <br />
+          <br>
           <p class="lead text-center">
             And we would like you to call us
-            <b>"Function To"</b> 
-           </p>
-            <br />
-            <br />
-            <br />
-            <br />
+            <b>"Function To"</b>
           </p>
-          </div>
-            <div class="container">
+          <br />
+          <br />
+          <br />
+          <br />
+          </p>
+          
+          <div class="container">
             <p class="lead">
               "ยินดีต้อนรับสู่เว็บไซร์อย่างเป็นทางการของ บริษัท เอฟทู จำกัด.
               ขณะนี้เว็บไซร์อยู่ในช่วงการจัดทำและพัฒนา ดำเนินการโดย
               โปรแกรมเมอร์ภายในบริษัทของเราเอง
               คุณสามารถเข้ามาเยี่ยมชมเว็บไซร์ของเราได้ทุกวันเพื่อติดตามความเคลื่อนไหวเปลี่ยแปลงเว็บไซร์ของเรา
               คุณจะได้เห็นทิศทางการพัฒนาที่ต่อเนื่องและเป็นลำดับขั้นที่ไม่หยุดจากทางเรา."
-            <br />
-            <br>
-            <p class="lead text-center">
-            และเราอยากให้คุณเรียกเราว่า <b>"ฟังค์ชั่น ทู"</b>
-            
-            </p>
-            </div>
-          </p>
-          <!-- <a
-            class="btn btn-lg btn-primary"
-            href="/docs/4.3/components/navbar/"
-            role="button"
-            >View navbar docs &raquo;</a
-          > -->
+              <br />
+              <br>
+              <p class="lead text-center">
+                และเราอยากให้คุณเรียกเราว่า <b>"ฟังค์ชั่น ทู"</b>
+          
+              </p>
           </div>
+          </div>
+          </p>
         </div>
       </div>
     </main>
+
     <div class="footer text-center mt-5">
       <div class="container-fluid">
         <div class="col-sm-12 small">Copyright F2 Co.,Ltd. 2020</div>
@@ -144,6 +139,7 @@
     </div>
 
     <!-- bootstrap js dependencies -->
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

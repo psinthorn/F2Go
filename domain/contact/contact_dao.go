@@ -2,10 +2,15 @@ package domain
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/psinthorn/F2Go/utils"
 )
+
+type contactDao struct{}
+
+var ContactDao contactDao
 
 var (
 	contacts = map[int64]*Contact{
@@ -24,7 +29,8 @@ var (
 	}
 )
 
-func GetContact(id int64) (*Contact, *utils.ApplicationError) {
+func (c *contactDao) GetContact(id int64) (*Contact, *utils.ApplicationError) {
+	log.Println("we're accessing contact database")
 	if contact := contacts[id]; contact != nil {
 		return contact, nil
 	}

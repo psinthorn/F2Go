@@ -18,3 +18,17 @@ func TestBubbleSort(t *testing.T) {
 	assert.EqualValues(t, 7, result[3])
 	assert.EqualValues(t, 2, result[4])
 }
+
+func getElements(n int) []int {
+	results := make([]int, n)
+	i := 0
+	for j := n - 1; j >= 0; j-- {
+		results[i] = j
+		i++
+	}
+	return results
+}
+
+func benchMarkBubbleSort(b *testing.B) {
+
+}

@@ -1,19 +1,38 @@
 package controllers
 
 import (
+	"encoding/json"
 	"html/template"
 	"net/http"
 	"strconv"
+
+	"github.com/psinthorn/F2Go/services"
+	"github.com/psinthorn/F2Go/utils"
 )
 
-func AboutIndex(res http.ResponseWriter, req *http.Request) {
-	id, err := strconv.ParseInt(req.URL.Query().Get("id", 10, 64))
+func GetAbout(res http.ResponseWriter, req *http.Request) {
+	id, err := strconv.ParseInt(req.URL.Query().Get("id"), 10, 64)
 
 	if err != nil {
+		appError := &utils.ApplicationError{
+			Message:    "about id must be a number",
+			StatusCode: http.StatusBadRequest,
+			Code:       "bad_request",
+		}
+		data, _ := json.Marshal(appError)
+		res.WriteHeader(appError.StatusCode)
+		res.Write(data)
+		return
 
 	}
 
-	return *services.GetAbout()
+	about, appError := services.AboutService.GetAbout(id)
+	if appError != nil {
+		data, _ := json.Marshal(appError)
+		res.WriteHeader(appError.StatusCode)
+		res.Write(data)
+		return
+	}
 
 	// data := *models.ContentDefault{
 	// 	Title:    "About",
@@ -24,5 +43,5 @@ func AboutIndex(res http.ResponseWriter, req *http.Request) {
 	// }
 	//Use template
 	tmpl := template.Must(template.ParseFiles("./views/about/index.html"))
-	tmpl.Execute(res, "About")
+	tmpl.Execute(res, about)
 }
