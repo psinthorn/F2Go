@@ -1,17 +1,16 @@
 package controllers
 
 import (
-	"encoding/json"
-	"html/template"
 	"net/http"
 	"strconv"
 
+	"github.com/gin-gonic/gin"
 	"github.com/psinthorn/F2Go/services"
 	"github.com/psinthorn/F2Go/utils"
 )
 
-func GetAbout(res http.ResponseWriter, req *http.Request) {
-	id, err := strconv.ParseInt(req.URL.Query().Get("id"), 10, 64)
+func GetAbout(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 
 	if err != nil {
 		appError := &utils.ApplicationError{
@@ -19,20 +18,18 @@ func GetAbout(res http.ResponseWriter, req *http.Request) {
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",
 		}
-		data, _ := json.Marshal(appError)
-		res.WriteHeader(appError.StatusCode)
-		res.Write(data)
+		c.JSON(appError.StatusCode, appError)
 		return
 
 	}
 
-	about, appError := services.AboutService.GetAbout(id)
+	data, appError := services.AboutService.GetAbout(id)
 	if appError != nil {
-		data, _ := json.Marshal(appError)
-		res.WriteHeader(appError.StatusCode)
-		res.Write(data)
+		c.JSON(appError.StatusCode, appError)
 		return
 	}
+
+	c.JSON(http.StatusOK, data)
 
 	// data := *models.ContentDefault{
 	// 	Title:    "About",
@@ -42,6 +39,6 @@ func GetAbout(res http.ResponseWriter, req *http.Request) {
 	// 	Status:   true,
 	// }
 	//Use template
-	tmpl := template.Must(template.ParseFiles("./views/about/index.html"))
-	tmpl.Execute(res, about)
+	// tmpl := template.Must(template.ParseFiles("./views/about/index.html"))
+	// tmpl.Execute(res, about)
 }
