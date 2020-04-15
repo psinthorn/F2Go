@@ -3,30 +3,30 @@ package app
 import (
 	"fmt"
 	"log"
-	"net/http"
-	"os"
 
-	"github.com/psinthorn/F2Go/controllers"
+	"github.com/gin-gonic/gin"
+	"github.com/psinthorn/F2Go/utils"
 )
+
+var (
+	router *gin.Engine
+)
+
+func init() {
+	router = gin.Default()
+}
 
 func StartApp() {
 	// Get port from env in case production
 	// if test run on localhost we need to manual port for system can start to run.
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8009"
-	}
-
-	http.HandleFunc("/about", controllers.GetAbout)
-	http.HandleFunc("/users", controllers.GetUser)
-	http.HandleFunc("/contact", controllers.GetContact)
-	http.HandleFunc("/", controllers.GetWelcome)
-	//http.ListenAndServe(":8080", nil)
+	port := utils.Server.PortRunning()
+	urlsMapping()
 
 	fmt.Println("Server running on " + port)
-	err := http.ListenAndServe(":"+port, nil)
+	err := router.Run(":" + port)
 	if err != nil {
 		log.Fatal("ListenAndServe:"+port, err)
+		// panic(err)
 	}
 
 }
