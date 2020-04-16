@@ -11,6 +11,7 @@ import (
 )
 
 func GetWelcome(c *gin.Context) {
+
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	log.Printf("welcome id is: %v", id)
 	if err != nil {
@@ -29,7 +30,9 @@ func GetWelcome(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, data)
+	c.HTML(http.StatusOK, "index.html", data)
+
+	// c.JSON(http.StatusOK, data)
 	// // if path include /api return this
 	// dataJson, _ := json.Marshal(welcome)
 	// res.Write(dataJson)
