@@ -10,5 +10,5 @@ func urlsMapping() {
 	router.GET("/users/:user_id", controllers.GetUser)
 	router.GET("/contact/:id", controllers.GetContact)
 	router.GET("/welcome/:id", controllers.GetWelcome)
-	router.GET("/", controllers.GetWelcome)
+	router.GET("/", controllers.GetIndex)
 }

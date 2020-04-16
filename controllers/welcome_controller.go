@@ -10,6 +10,10 @@ import (
 	"github.com/psinthorn/F2Go/utils"
 )
 
+func GetIndex(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", nil)
+}
+
 func GetWelcome(c *gin.Context) {
 
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
@@ -30,7 +34,7 @@ func GetWelcome(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "index.html", data)
+	c.HTML(http.StatusOK, "welcome.html", data)
 
 	// c.JSON(http.StatusOK, data)
 	// // if path include /api return this
