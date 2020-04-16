@@ -29,7 +29,7 @@ func GetContact(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, data)
+	c.HTML(http.StatusOK, "contact.html", data)
 
 	// // if call api return json data to client
 	// contactJson, _ := json.Marshal(data)

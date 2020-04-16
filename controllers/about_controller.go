@@ -29,7 +29,14 @@ func GetAbout(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, data)
+	////HTML u;ll,k,l,l,k,l,oll.lkuht
+	c.HTML(http.StatusOK, "about.html", data)
+
+	////JSON rendering
+	// c.JSON(http.StatusOK, data)
+
+	////XML rendering
+	// c.XML()
 
 	// data := *models.ContentDefault{
 	// 	Title:    "About",

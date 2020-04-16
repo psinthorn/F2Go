@@ -34,7 +34,7 @@
       }
     </style>
 
-    <title>F2 Contact</title>
+    <title>{{.Title}}</title>
   </head>
 
   <body>
@@ -45,22 +45,15 @@
         <div class="jumbotron">
           {{ if .Status }}
           <h1>{{.Title}}</h1>
-          <p class="lead"><br />{{.Body}}</p>
           <p class="lead">
-            <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
-            <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
-            <br />Website:
-            <a href="{{.Website}}" target="_blank">{{.Website}}</a>
-            <br />Mobile:
-            <a href="tel:{{.Mobile}}" target="_blank">{{.Mobile}}</a>
+            {{.Body}}
           </p>
-
-          <p class="lead"></p>
-
-          <br />
-          <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
-            Email Me
-          </a> -->
+          <p class="lead">
+            {{.SubBody}}
+          </p>
+          <a class="btn btn-lg btn-primary" href="/?id=1" role="button">
+            Find out More on Our Service and Product
+          </a>
           {{else}}
           <h1>!Oops Nothing Here</h1>
           <p class="mt-5">
