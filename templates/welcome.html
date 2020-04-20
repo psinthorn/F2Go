@@ -38,9 +38,11 @@
 
 <body>
    {{ template "navbar.html" .}}
+
   
 
     <main role="main" class="container">
+        {{ template "banner-top.html" .}}
         <div class="mt-5">
             <div class="jumbotron p-5">
                 {{ if .Status }}
