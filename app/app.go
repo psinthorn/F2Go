@@ -3,9 +3,9 @@ package app
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/psinthorn/F2Go/utils"
 )
 
 var (
@@ -19,12 +19,12 @@ func init() {
 func StartApp() {
 	// Get port from env in case production
 	// if test run on localhost we need to manual port for system can start to run.
-	// port := utils.Server.PortRunning()
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8089"
-	}
 
+	// port := os.Getenv("PORT")
+	// if port == "" {
+	// 	port = "8089"
+	// }
+	port := utils.Server.PortRunning()
 	router.LoadHTMLGlob("templates/*")
 	urlsMapping()
 
