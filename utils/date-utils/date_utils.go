@@ -3,7 +3,7 @@ package date_utils
 import "time"
 
 var (
-	apiDateFormat := "2020-04-01T08:18:38Z"
+	apiDateFormat = "2020-04-01T08:18:38Z"
 )
 
 func GetNow() time.Time {
@@ -11,5 +11,5 @@ func GetNow() time.Time {
 }
 
 func GetNowString() string {
-	return GetNow().Format(apiapiDateFormat)
+	return GetNow().Format(apiDateFormat)
 }
