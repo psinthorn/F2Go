@@ -15,8 +15,8 @@ var (
 		1: {Id: 1,
 			Title:    "About Us",
 			SubTitle: "About F2",
-			Body:     "F2 is modern technology service company  we're focus on web application mobile and iOT development and deployment service.",
-			SubBody:  "Web Hosting, Email and DNS Server is also our base service for more than 18 Years.",
+			Body:     "F2 is modern technology service company  we're focus on web application mobile and iOT development with deployment service.",
+			SubBody:  "Web Hosting, Email and DNS Server is also our base service for more than 18 years.",
 			Status:   true},
 	}
 	AboutDao aboutDao
