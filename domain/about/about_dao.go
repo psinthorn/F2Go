@@ -1,9 +1,9 @@
 package abouts
 
 import (
+	"errors"
 	"fmt"
 	"log"
-	"net/http"
 
 	errors "github.com/psinthorn/F2Go/utils"
 )
@@ -28,9 +28,6 @@ func (a *aboutDao) GetAbout(id int64) (*About, *errors.RestErr) {
 		return about, nil
 	}
 
-	return nil, &errors.RestErr{
-		Message:    fmt.Sprintf("About with id %v not exist", id),
-		StatusCode: http.StatusNotFound,
-		Code:       "not_found",
-	}
+	return nil, &errors.NewNotFoundError(fmt.Sprintf("About with id %v not exist", id))
+
 }

@@ -22,7 +22,7 @@ func (user *User) Get() (*User, *errors.RestErr) {
 		user.DateCreated = result.DateCreated
 		return user, nil
 	}
-	return nil, utils.NewNotFoundError(fmt.Sprintf("user id %v not exist", user.Id))
+	return nil, errors.NewBadRequestError(fmt.Sprintf("user id %v not exist", user.Id))
 
 }
 
@@ -30,9 +30,9 @@ func (user *User) Save() (*User, *errors.RestErr) {
 	result := usersDB[user.Id]
 	if result != nil {
 		if result.Email == user.Email {
-			return nil, utils.NewBadRequestError(fmt.Sprintf("user email %v already exist", user.Email))
+			return nil, errors.NewBadRequestError(fmt.Sprintf("user email %v already exist", user.Email))
 		}
-		return nil, utils.NewBadRequestError(fmt.Sprintf("user aleady exist"))
+		return nil, errors.NewBadRequestError(fmt.Sprintf("user aleady exist"))
 	}
 	return user, nil
 }
