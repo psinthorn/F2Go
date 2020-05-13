@@ -1,4 +1,4 @@
-package domain
+package contents
 
 // var (
 // 	contents = map[int64]*Content{}

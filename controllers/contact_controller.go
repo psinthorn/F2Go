@@ -13,7 +13,7 @@ func GetContact(c *gin.Context) {
 
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
-		appError := &utils.ApplicationError{
+		appError := utils.RestErr{
 			Message:    "contact_id must be an integer",
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",

@@ -1,4 +1,4 @@
-package domain
+package contacts
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetContactContactNotFound(t *testing.T) {
-	contact, err := GetContact(0)
+	contact, err := ContactDao.GetContact(0)
 
 	// use streche/testify for testing
 	assert.Nil(t, contact, "We not expecting to get any contact from id 0")
@@ -24,7 +24,7 @@ func TestGetContactContactNotFound(t *testing.T) {
 }
 
 func TestGetContact(t *testing.T) {
-	contact, err := GetContact(1)
+	contact, err := ContactDao.GetContact()
 
 	assert.Nil(t, err, "expect to get nil error")
 	assert.NotNil(t, contact, "expect to get contact with id 1")

@@ -1,4 +1,4 @@
-package domain
+package contents
 
 type Content struct {
 	Title    string

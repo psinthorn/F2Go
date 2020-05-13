@@ -19,7 +19,7 @@ func GetWelcome(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	log.Printf("welcome id is: %v", id)
 	if err != nil {
-		appError := &utils.ApplicationError{
+		appError := &utils.RestErr{
 			Message:    "welcome id must be a number",
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",

@@ -13,7 +13,7 @@ func GetAbout(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 
 	if err != nil {
-		appError := &utils.ApplicationError{
+		appError := &utils.RestErr{
 			Message:    "about id must be a number",
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",

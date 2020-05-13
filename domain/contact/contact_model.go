@@ -1,4 +1,4 @@
-package domain
+package contacts
 
 type Contact struct {
 	Id        uint64 `json:"id"`

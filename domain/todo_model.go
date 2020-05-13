@@ -1,4 +1,4 @@
-package domain
+package todos
 
 type Todo struct {
 	Title string

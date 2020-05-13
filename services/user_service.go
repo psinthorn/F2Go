@@ -1,14 +1,20 @@
 package services
 
 import (
-	domain "github.com/psinthorn/F2Go/domain/user"
-	"github.com/psinthorn/F2Go/utils"
+	"github.com/psinthorn/F2Go/domain/users"
+	errors "github.com/psinthorn/F2Go/utils"
 )
 
 type userService struct{}
 
 var UserService userService
 
-func (u *userService) GetUser(userId int64) (*domain.User, *utils.ApplicationError) {
-	return domain.UserDao.GetUser(userId)
+func CreateUser(user users.User) (*users.User, *errors.RestErr) {
+	if err := user.Validate(); err != nil {
+		return nil, err
+	}
+}
+
+func (u *userService) GetUser(userId int64) (*domain.User, *errors.RestErr) {
+	return nil, nil
 }
