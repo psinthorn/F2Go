@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	errors "github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 type welcomeDao struct{}
@@ -22,13 +22,13 @@ var (
 	WelcomeDao welcomeDao
 )
 
-func (wc *welcomeDao) GetWelcome(id int64) (*Welcome, *errors.RestErr) {
+func (wc *welcomeDao) GetWelcome(id int64) (*Welcome, *utils.RestErr) {
 	log.Println("we're access welcome database")
 	if welcome := welcomes[id]; welcome != nil {
 		return welcome, nil
 	}
 
-	return nil, &errors.RestErr{
+	return nil, &utils.RestErr{
 		Message:    fmt.Sprintf("welcome id %v not exist", id),
 		StatusCode: http.StatusNotFound,
 		Code:       "not_found",

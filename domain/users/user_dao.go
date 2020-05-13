@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"log"
 
-	errors "github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 var (
 	usersDB = make(map[int64]*User)
 )
 
-func (user *User) Get() (*User, *errors.RestErr) {
+func (user *User) Get() (*User, *utils.RestErr) {
 	log.Println("we're accessing user database")
 	if result := usersDB[user.Id]; result != nil {
 		user.Id = result.Id
@@ -22,17 +22,17 @@ func (user *User) Get() (*User, *errors.RestErr) {
 		user.DateCreated = result.DateCreated
 		return user, nil
 	}
-	return nil, errors.NewBadRequestError(fmt.Sprintf("user id %v not exist", user.Id))
+	return nil, utils.NewBadRequestError(fmt.Sprintf("user id %v not exist", user.Id))
 
 }
 
-func (user *User) Save() (*User, *errors.RestErr) {
+func (user *User) Save() (*User, *utils.RestErr) {
 	result := usersDB[user.Id]
 	if result != nil {
 		if result.Email == user.Email {
-			return nil, errors.NewBadRequestError(fmt.Sprintf("user email %v already exist", user.Email))
+			return nil, utils.NewBadRequestError(fmt.Sprintf("user email %v already exist", user.Email))
 		}
-		return nil, errors.NewBadRequestError(fmt.Sprintf("user aleady exist"))
+		return nil, utils.NewBadRequestError(fmt.Sprintf("user aleady exist"))
 	}
 	return user, nil
 }

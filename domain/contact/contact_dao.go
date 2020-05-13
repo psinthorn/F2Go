@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	errors "github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 type contactDao struct{}
@@ -29,13 +29,13 @@ var (
 	}
 )
 
-func (c *contactDao) GetContact(id int64) (*Contact, *errors.RestErr) {
+func (c *contactDao) GetContact(id int64) (*Contact, *utils.RestErr) {
 	log.Println("we're accessing contact database")
 	if contact := contacts[id]; contact != nil {
 		return contact, nil
 	}
 
-	return nil, &errors.RestErr{
+	return nil, &utils.RestErr{
 		Message:    fmt.Sprintf("contact_id %v not exist", id),
 		StatusCode: http.StatusNotFound,
 		Code:       "not_found",

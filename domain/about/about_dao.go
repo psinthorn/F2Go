@@ -27,6 +27,6 @@ func (a *aboutDao) GetAbout(id int64) (*About, *utils.RestErr) {
 		return about, nil
 	}
 
-	return nil, &utils.NewNotFoundError(fmt.Sprintf("About with id %v not exist", id))
+	return nil, utils.NewNotFoundError(fmt.Sprintf("About with id %v not exist", id))
 
 }

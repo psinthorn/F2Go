@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/psinthorn/F2Go/services"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 func CreateUser(c *gin.Context) {
@@ -61,11 +62,8 @@ func CreateUser(c *gin.Context) {
 func GetUser(c *gin.Context) {
 	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 	if err != nil {
-		appError := &utils.RestErr{
-			Message:    "user_id must be a number",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
+		appError := &utils.NewBadRequestError("user_id must be a number")
+
 		c.JSON(appError.StatusCode, appError)
 		return
 	}

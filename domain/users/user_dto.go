@@ -3,7 +3,7 @@ package users
 import (
 	"strings"
 
-	errors "github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 type User struct {
@@ -15,10 +15,10 @@ type User struct {
 	DateCreated string `json:""date_created`
 }
 
-func (user *User) Validate() *errors.RestErr {
+func (user *User) Validate() *utils.RestErr {
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 	if user.Email == "" {
-		return errors.NewBadRequestError("Invalid Email Address")
+		return utils.NewBadRequestError("Invalid Email Address")
 	}
 	return nil
 }

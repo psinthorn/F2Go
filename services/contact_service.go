@@ -1,14 +1,14 @@
 package services
 
 import (
-	domain "github.com/psinthorn/F2Go/domain/contact"
-	errors "github.com/psinthorn/F2Go/utils"
+	contacts "github.com/psinthorn/F2Go/domain/contact"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 type contactService struct{}
 
 var ContactService contactService
 
-func (c *contactService) GetContact(id int64) (*domain.Contact, *errors.RestErr) {
-	return domain.ContactDao.GetContact(id)
+func (c *contactService) GetContact(id int64) (*contacts.Contact, *utils.RestErr) {
+	return contacts.ContactDao.GetContact(id)
 }
