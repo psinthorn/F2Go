@@ -1,4 +1,4 @@
-package domain
+package abouts
 
 type About struct {
 	Id       uint64 `json:"id"`

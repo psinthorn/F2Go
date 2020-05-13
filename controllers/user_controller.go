@@ -6,9 +6,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	domain "github.com/psinthorn/F2Go/domain/user"
+
 	"github.com/psinthorn/F2Go/services"
-	"github.com/psinthorn/F2Go/utils"
 )
 
 func CreateUser(c *gin.Context) {
