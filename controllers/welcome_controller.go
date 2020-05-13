@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/psinthorn/F2Go/services"
-	"github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 func GetIndex(c *gin.Context) {
@@ -19,7 +19,7 @@ func GetWelcome(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	log.Printf("welcome id is: %v", id)
 	if err != nil {
-		appError := &utils.NewBadRequestError("welcome id must be a number")
+		appError := utils.NewBadRequestError("welcome id must be a number")
 		c.JSON(appError.StatusCode, appError)
 		return
 	}

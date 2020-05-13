@@ -63,7 +63,7 @@ func CreateUser(c *gin.Context) {
 func GetUser(c *gin.Context) {
 	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 	if err != nil {
-		appError := &utils.NewBadRequestError("user_id must be a number")
+		appError := utils.NewNotFoundError("user_id must be a number")
 		c.JSON(appError.StatusCode, appError)
 		return
 	}

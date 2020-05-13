@@ -6,18 +6,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/psinthorn/F2Go/services"
-	"github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 func GetAbout(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 
 	if err != nil {
-		appError := &utils.RestErr{
-			Message:    "about id must be a number",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
+		appError := utils.NewBadRequestError("about id must be a number")
+
 		c.JSON(appError.StatusCode, appError)
 		return
 

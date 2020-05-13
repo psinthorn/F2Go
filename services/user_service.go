@@ -9,7 +9,7 @@ type userService struct{}
 
 var UserService userService
 
-func CreateUser(user users.User) (*users.User, *utils.RestErr) {
+func (u *userService) CreateUser(user users.User) (*users.User, *utils.RestErr) {
 	if err := user.Validate(); err != nil {
 		return nil, err
 	}
