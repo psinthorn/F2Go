@@ -1,11 +1,10 @@
 package abouts
 
 import (
-	"errors"
 	"fmt"
 	"log"
 
-	errors "github.com/psinthorn/F2Go/utils"
+	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
 type aboutDao struct{}
@@ -22,12 +21,12 @@ var (
 	AboutDao aboutDao
 )
 
-func (a *aboutDao) GetAbout(id int64) (*About, *errors.RestErr) {
+func (a *aboutDao) GetAbout(id int64) (*About, *utils.RestErr) {
 	log.Println("we're accessing about database")
 	if about := abouts[id]; about != nil {
 		return about, nil
 	}
 
-	return nil, &errors.NewNotFoundError(fmt.Sprintf("About with id %v not exist", id))
+	return nil, &utils.NewNotFoundError(fmt.Sprintf("About with id %v not exist", id))
 
 }
