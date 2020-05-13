@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/psinthorn/F2Go/utils"
+	errors "github.com/psinthorn/F2Go/utils"
 )
 
 type aboutDao struct{}
@@ -22,13 +22,13 @@ var (
 	AboutDao aboutDao
 )
 
-func (a *aboutDao) GetAbout(id int64) (*About, *utils.ApplicationError) {
+func (a *aboutDao) GetAbout(id int64) (*About, *errors.RestErr) {
 	log.Println("we're accessing about database")
 	if about := abouts[id]; about != nil {
 		return about, nil
 	}
 
-	return nil, &utils.ApplicationError{
+	return nil, &errors.RestErr{
 		Message:    fmt.Sprintf("About with id %v not exist", id),
 		StatusCode: http.StatusNotFound,
 		Code:       "not_found",
