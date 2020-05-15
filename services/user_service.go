@@ -13,9 +13,16 @@ func (u *userService) CreateUser(user users.User) (*users.User, *utils.RestErr) 
 	if err := user.Validate(); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	if err := user.Save(); err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (u *userService) GetUser(userId int64) (*users.User, *utils.RestErr) {
-	return nil, nil
+	result := &users.User{Id: userId}
+	if err := result.Get(); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

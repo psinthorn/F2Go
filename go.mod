@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.1 // indirect
 	github.com/gorilla/mux v1.7.3
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
