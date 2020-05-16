@@ -1,6 +1,6 @@
 package contents
 
-type ContentDefault struct {
+type contentDefault struct {
 	Id          int64  `json:"id"`
 	Title       string `json:"title"`
 	SubTitle    string `json:"sub_tilte"`
@@ -10,8 +10,10 @@ type ContentDefault struct {
 	CreatedDate string `json:"created_date"`
 }
 
-type Content ContentDefault {
-	Category string `json"category"`
+type Content contentDefault {
+	User 		string `json:"user"`
+	Section		string `json:"section"`
+	Category 	string `json:"category"`
 }
 
 
