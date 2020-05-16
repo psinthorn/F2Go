@@ -13,7 +13,7 @@ const (
 	mysql_users_username = "mysql_users_username"
 	mysql_users_password = "mysql_users_password"
 	mysql_users_host     = "mysql_users_host"
-	mysql_users_schema   = "mysql_users_schema"
+	mysql_f2go_schema    = "mysql_f2go_schema"
 )
 
 var (
@@ -22,7 +22,7 @@ var (
 	username = os.Getenv(mysql_users_username)
 	password = os.Getenv(mysql_users_password)
 	host     = os.Getenv(mysql_users_host)
-	schema   = os.Getenv(mysql_users_schema)
+	schema   = os.Getenv(mysql_f2go_schema)
 )
 
 func init() {

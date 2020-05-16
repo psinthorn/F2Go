@@ -11,6 +11,7 @@ type User struct {
 	FirstName   string `json:"first_name"`
 	LastName    string `json:"last_name"`
 	Email       string `json:"email"`
+	Status      int    `json:"status"`
 	DateCreated string `json:""date_created`
 }
 
