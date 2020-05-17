@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/psinthorn/F2Go/services"
+	services "github.com/psinthorn/F2Go/services/contents"
 	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 

@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/psinthorn/F2Go/domain/users"
-	"github.com/psinthorn/F2Go/services"
+	services "github.com/psinthorn/F2Go/services/users"
 	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
