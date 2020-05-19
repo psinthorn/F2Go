@@ -1,10 +1,11 @@
 package users_db
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"os"
+
+	"database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -29,6 +30,7 @@ func init() {
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8",
 		username, password, host, schema,
 	)
+	//fmt.Println(dataSourceName)
 	var err error
 	Client, err = sql.Open("mysql", dataSourceName)
 	if err != nil {

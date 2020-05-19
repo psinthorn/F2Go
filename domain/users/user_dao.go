@@ -3,16 +3,15 @@ package users
 import (
 	"fmt"
 	"log"
-	"strings"
 
 	"github.com/psinthorn/F2Go/datasources/mysql/users_db"
 	date_utils "github.com/psinthorn/F2Go/utils/date-utils"
 	utils "github.com/psinthorn/F2Go/utils/errors"
+	mysql_errors "github.com/psinthorn/F2Go/utils/mysql_utils"
 )
 
 const (
 	indexUniqueEmail    = "email_UNIQUE"
-	errorNoRows         = "no rows in result set"
 	queryInsertUser     = "INSERT INTO users(first_name, last_name, email, status, date_created) VALUES(?,?,?,?,?);"
 	querySelectUserById = "SELECT id,first_name, last_name, email, status, date_created FROM users WHERE id=? ;"
 )
@@ -31,7 +30,7 @@ func (user *User) Save() *utils.RestErr {
 	fmt.Sprintln("MySql preparing")
 	stmt, err := users_db.Client.Prepare(queryInsertUser)
 	if err != nil {
-		return utils.NewInternalServerError(fmt.Sprintf("Internal server error on save user %s", err.Error()))
+		return mysql_errors.ParseError(err)
 	}
 	//Close connection
 	defer stmt.Close()
@@ -41,17 +40,12 @@ func (user *User) Save() *utils.RestErr {
 	insertResult, err := stmt.Exec(user.FirstName, user.LastName, user.Email, user.Status, user.DateCreated)
 	//Excute errors handle
 	if err != nil {
-		if strings.Contains(err.Error(), indexUniqueEmail) {
-			return utils.NewBadRequestError(fmt.Sprintf("user with email %s is already exist ", user.Email))
-		}
-		return utils.NewInternalServerError(fmt.Sprintf("Internal server error on save user %s", err.Error()))
+		return mysql_errors.ParseError(err)
 	}
 	//Recheck and return result
 	userId, err := insertResult.LastInsertId()
 	if err != nil {
-		if err != nil {
-			return utils.NewInternalServerError(fmt.Sprintf("Internal server error on save user %s", err.Error()))
-		}
+		return mysql_errors.ParseError(err)
 	}
 	user.Id = userId
 	return nil
@@ -75,16 +69,18 @@ func (user *User) Get() *utils.RestErr {
 	log.Println("users_db database is connected")
 	stmt, err := users_db.Client.Prepare(querySelectUserById)
 	if err != nil {
-		return utils.NewInternalServerError(fmt.Sprintf("Internal server error on save user %s", err.Error()))
+		//return utils.NewInternalServerError(fmt.Sprintf("Internal server error on save user %s", err.Error()))
+		return mysql_errors.ParseError(err)
 	}
 	defer stmt.Close()
 
 	result := stmt.QueryRow(user.Id)
 	if err := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.Status, &user.DateCreated); err != nil {
-		if strings.Contains(err.Error(), errorNoRows) {
-			return utils.NewNotFoundError(fmt.Sprintf("user id %d not exist", user.Id))
-		}
-		return utils.NewBadRequestError(fmt.Sprintf("Error when trying to get user id %d: %s  ", user.Id, err.Error()))
+		// if strings.Contains(err.Error(), errorNoRows) {
+		// 	return utils.NewNotFoundError(fmt.Sprintf("user id %d not exist", user.Id))
+		// }
+		// return utils.NewBadRequestError(fmt.Sprintf("Error when trying to get user id %d: %s  ", user.Id, err.Error()))
+		return mysql_errors.ParseError(err)
 	}
 	return nil
 }
