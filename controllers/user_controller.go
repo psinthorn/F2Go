@@ -12,26 +12,16 @@ import (
 	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
+//Create User
 func CreateUser(c *gin.Context) {
 	//declair user variable
 	var user users.User
-	fmt.Sprintln(user)
 
 	//Use GIN ShouldBindJson()
 	if err := c.ShouldBindJSON(&user); err != nil {
 		//TODO: Handle Error
 		createErr := utils.NewBadRequestError("Invalid JSON Body")
 		c.JSON(createErr.StatusCode, createErr)
-
-		//TODO:
-		//Print Error to Console
-		fmt.Println("-")
-		fmt.Println("------------------")
-		fmt.Println("- Bad request")
-		fmt.Println("-")
-		fmt.Println("- " + err.Error())
-		fmt.Println("-")
-		fmt.Println("------------------")
 		return
 	}
 	//NO any error
@@ -43,80 +33,53 @@ func CreateUser(c *gin.Context) {
 	//TODO: Handle error
 	if createErr != nil {
 		c.JSON(createErr.StatusCode, createErr)
-		fmt.Println(createErr)
 		return
 	}
 	//Return created user struct
 	c.JSON(http.StatusCreated, result)
-	//TODO
-	//Print result to gin console
-	fmt.Println("-")
-	fmt.Println("------------------")
-	fmt.Println("- User is created")
-	fmt.Println("- ", result)
-	fmt.Println("-")
-	fmt.Println("------------------")
-
 }
 
-//get user by id
+//Get user by id
 func GetUser(c *gin.Context) {
 	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 	if err != nil {
-		appError := utils.NewBadRequestError("user_id must be a number")
+		appError := utils.NewBadRequestError("user id must be a number")
 		c.JSON(appError.StatusCode, appError)
 		return
 	}
 
-	data, appError := services.UserService.GetUser(userId)
+	result, appError := services.UserService.GetUser(userId)
 	if appError != nil {
 		c.JSON(appError.StatusCode, appError)
 		return
 	}
-	c.JSON(http.StatusOK, data)
-	// // if path include /api return this
-	// dataJson, _ := json.Marshal(user)
-	// res.Write(dataJson)
+	c.JSON(http.StatusOK, result)
+}
 
-	// // if normal path return this
-	// tmpl := template.Must(template.ParseFiles("./views/user/index.html"))
-	// tmpl.Execute(res, user)
+//Update user
+func UpdateUser(c *gin.Context) {
+	var user users.User
+	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
+	if err != nil {
+		appError := utils.NewBadRequestError("user id must be a number")
+		c.JSON(appError.StatusCode, appError)
+		return
+	}
 
-	// //Vanila style for read request from body
-	// //Read json data from request body
-	// bytes, err := ioutil.ReadAll(c.Request.Body)
-	// fmt.Println(bytes)
-	// if err != nil {
-	// 	//TODO: Handle err
-	// 	//c.HTML(http.StatusNotImplemented, c.JSON(err))
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("------------------")
-	// 	fmt.Println("- Error of data input")
-	// 	fmt.Println("-")
-	// 	fmt.Println(err.Error())
-	// 	fmt.Println("------------------")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	return
-	// }
+	//Use GIN ShouldBindJson()
+	if err := c.ShouldBindJSON(&user); err != nil {
+		//TODO: Handle Error
+		createErr := utils.NewBadRequestError("Invalid JSON Body")
+		c.JSON(createErr.StatusCode, createErr)
+		return
+	}
 
-	// if err := json.Unmarshal(bytes, &user); err != nil {
-	// 	//TODO json error
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("------------------")
-	// 	fmt.Println("- Unmarshal can't use bytes data to poplate user struct")
-	// 	fmt.Println("-")
-	// 	fmt.Println("- " + err.Error())
-	// 	fmt.Println("------------------")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	fmt.Println("-")
-	// 	return
-	// }
+	user.Id = userId
+	result, appError := services.UserService.UpdateUser(user)
+	if appError != nil {
+		c.JSON(appError.StatusCode, appError)
+		return
+	}
+	c.JSON(http.StatusOK, result)
 
 }

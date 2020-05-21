@@ -10,14 +10,18 @@ import (
 	mysql_errors "github.com/psinthorn/F2Go/utils/mysql_utils"
 )
 
+type usersDatabase struct{}
+
 const (
 	indexUniqueEmail    = "email_UNIQUE"
 	queryInsertUser     = "INSERT INTO users(first_name, last_name, email, status, date_created) VALUES(?,?,?,?,?);"
 	querySelectUserById = "SELECT id,first_name, last_name, email, status, date_created FROM users WHERE id=? ;"
+	queryUpdateUserById = "Update users SET first_name=?, last_name=?, email=?, status=? WHERE id=?"
 )
 
 var (
-	usersDB = make(map[int64]*User)
+	usersDB       = make(map[int64]*User)
+	UsersDatabase usersDatabase
 )
 
 //Create user database
@@ -80,6 +84,30 @@ func (user *User) Get() *utils.RestErr {
 		// 	return utils.NewNotFoundError(fmt.Sprintf("user id %d not exist", user.Id))
 		// }
 		// return utils.NewBadRequestError(fmt.Sprintf("Error when trying to get user id %d: %s  ", user.Id, err.Error()))
+		return mysql_errors.ParseError(err)
+	}
+	return nil
+}
+
+func (u *usersDatabase) Update(user *User) *utils.RestErr {
+	//TODO
+	//Test connection
+	//Prepare update statment
+	//Exac statment
+	//Handle errors
+	//return result
+	if err := users_db.Client.Ping(); err != nil {
+		return utils.NewInternalServerError(fmt.Sprintf("Internal server error %s", err.Error()))
+	}
+
+	stmt, err := users_db.Client.Prepare(queryUpdateUserById)
+	if err != nil {
+		return mysql_errors.ParseError(err)
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(user.FirstName, user.LastName, user.Email, user.Status, user.Id)
+	if err != nil {
 		return mysql_errors.ParseError(err)
 	}
 	return nil

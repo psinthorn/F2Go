@@ -13,6 +13,8 @@ func urlsMapping() {
 	router.GET("/", controllers.GetIndex)
 
 	//user route
-	router.GET("/users/:user_id", controllers.GetUser)
 	router.POST("/users", controllers.CreateUser)
+	router.GET("/users/:user_id", controllers.GetUser)
+	router.PUT("/users/:user_id", controllers.UpdateUser)
+
 }
