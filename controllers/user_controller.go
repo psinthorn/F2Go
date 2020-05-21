@@ -27,7 +27,7 @@ func CreateUser(c *gin.Context) {
 	//NO any error
 	//TODO: Send data to server to create user
 	fmt.Println("If user valid --> Start Here")
-	result, createErr := services.UserService.CreateUser(user)
+	result, createErr := services.UsersService.CreateUser(user)
 
 	//If got and error handle error
 	//TODO: Handle error
@@ -48,7 +48,7 @@ func GetUser(c *gin.Context) {
 		return
 	}
 
-	result, appError := services.UserService.GetUser(userId)
+	result, appError := services.UsersService.GetUser(userId)
 	if appError != nil {
 		c.JSON(appError.StatusCode, appError)
 		return
@@ -58,6 +58,10 @@ func GetUser(c *gin.Context) {
 
 //Update user
 func UpdateUser(c *gin.Context) {
+	//Checking PUT or Patch
+	reqMethod := c.Request.Method
+	fmt.Println(reqMethod)
+
 	var user users.User
 	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 	if err != nil {
@@ -75,7 +79,7 @@ func UpdateUser(c *gin.Context) {
 	}
 
 	user.Id = userId
-	result, appError := services.UserService.UpdateUser(user)
+	result, appError := services.UsersService.UpdateUser(reqMethod, user)
 	if appError != nil {
 		c.JSON(appError.StatusCode, appError)
 		return
