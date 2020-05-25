@@ -12,8 +12,18 @@ import (
 	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
+//Get user id from parameter
+func getUserId(userIdParam string) (int64, *utils.RestErr) {
+	userId, err := strconv.ParseInt(userIdParam, 10, 64)
+	if err != nil {
+		appError := utils.NewBadRequestError("user id must be a number")
+		return 0, appError
+	}
+	return userId, nil
+}
+
 //Create User
-func CreateUser(c *gin.Context) {
+func Create(c *gin.Context) {
 	//declair user variable
 	var user users.User
 
@@ -40,11 +50,10 @@ func CreateUser(c *gin.Context) {
 }
 
 //Get user by id
-func GetUser(c *gin.Context) {
-	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
+func Get(c *gin.Context) {
+	userId, err := getUserId(c.Param("user_id"))
 	if err != nil {
-		appError := utils.NewBadRequestError("user id must be a number")
-		c.JSON(appError.StatusCode, appError)
+		c.JSON(err.StatusCode, err)
 		return
 	}
 
@@ -57,7 +66,7 @@ func GetUser(c *gin.Context) {
 }
 
 //Update user
-func UpdateUser(c *gin.Context) {
+func Update(c *gin.Context) {
 	//Checking PUT or Patch
 	reqMethod := c.Request.Method
 	fmt.Println(reqMethod)
@@ -86,4 +95,19 @@ func UpdateUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 
+}
+
+//Delete user by id
+func Delete(c *gin.Context) {
+	userId, err := getUserId(c.Param("user_id"))
+	if err != nil {
+		c.JSON(err.StatusCode, err)
+		return
+	}
+	if err = services.UsersService.DeleteUser(userId); err != nil {
+		c.JSON(err.StatusCode, err)
+		return
+	}
+	c.JSON(http.StatusOK, map[string]string{"status": "User deleted"})
+	return
 }
