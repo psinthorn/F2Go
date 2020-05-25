@@ -1,11 +1,10 @@
 package app
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
-	"github.com/psinthorn/F2Go/utils"
+	"github.com/psinthorn/F2Go/configs"
 )
 
 var (
@@ -17,21 +16,14 @@ func init() {
 }
 
 func StartApp() {
-	// Get port from env in case production
-	// if test run on localhost we need to manual port for system can start to run.
-
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "8089"
-	// }
-	port := utils.Server.PortRunning()
-	router.LoadHTMLGlob("templates/*")
+	// Get server port from port running selection configs
+	port := configs.Server.PortRunning("8089")
+	router.LoadHTMLGlob("templates/*/*.html")
+	router.Static("/assets/images", "./assets/images")
+	router.Static("/assets/css", "./assets/css")
 	urlsMapping()
-
-	fmt.Println("Server running on " + port)
 	err := router.Run(":" + port)
 	if err != nil {
 		log.Fatal("ListenAndServe:"+port, err)
-		// panic(err)
 	}
 }

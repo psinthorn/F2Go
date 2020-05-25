@@ -14,9 +14,11 @@ type usersDatabase struct{}
 
 const (
 	indexUniqueEmail    = "email_UNIQUE"
-	queryInsertUser     = "INSERT INTO users(first_name, last_name, email, status, date_created) VALUES(?,?,?,?,?);"
+	queryInsertUser     = "INSERT INTO users(first_name, last_name, avatar, email, password, status, date_created) VALUES(?,?,?,?,?,?,?);"
 	querySelectUserById = "SELECT id,first_name, last_name, email, status, date_created FROM users WHERE id=? ;"
+	//querySelectUserById = "SELECT * FROM users WHERE id=? ;"
 	queryUpdateUserById = "Update users SET first_name=?, last_name=?, email=?, status=? WHERE id=?"
+	queryDeleteUserById = "Delete FROM users WHERE id=?"
 )
 
 var (
@@ -41,7 +43,7 @@ func (user *User) Save() *utils.RestErr {
 	//Statment Excute
 	fmt.Sprintln("MySql prepare is passed")
 	user.DateCreated = date_utils.GetNowString()
-	insertResult, err := stmt.Exec(user.FirstName, user.LastName, user.Email, user.Status, user.DateCreated)
+	insertResult, err := stmt.Exec(user.FirstName, user.LastName, user.Avatar, user.Email, user.Password, user.Status, user.DateCreated)
 	//Excute errors handle
 	if err != nil {
 		return mysql_errors.ParseError(err)
@@ -80,10 +82,6 @@ func (user *User) Get() *utils.RestErr {
 
 	result := stmt.QueryRow(user.Id)
 	if err := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.Status, &user.DateCreated); err != nil {
-		// if strings.Contains(err.Error(), errorNoRows) {
-		// 	return utils.NewNotFoundError(fmt.Sprintf("user id %d not exist", user.Id))
-		// }
-		// return utils.NewBadRequestError(fmt.Sprintf("Error when trying to get user id %d: %s  ", user.Id, err.Error()))
 		return mysql_errors.ParseError(err)
 	}
 	return nil
@@ -107,6 +105,21 @@ func (u *usersDatabase) Update(user *User) *utils.RestErr {
 	defer stmt.Close()
 
 	_, err = stmt.Exec(user.FirstName, user.LastName, user.Email, user.Status, user.Id)
+	if err != nil {
+		return mysql_errors.ParseError(err)
+	}
+	return nil
+}
+
+//Delete user from database
+func (user *usersDatabase) Delete(id int64) *utils.RestErr {
+	stmt, err := users_db.Client.Prepare(queryDeleteUserById)
+	if err != nil {
+		return mysql_errors.ParseError(err)
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(id)
 	if err != nil {
 		return mysql_errors.ParseError(err)
 	}

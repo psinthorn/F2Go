@@ -13,6 +13,7 @@ type usersServiceInterface interface {
 	CreateUser(users.User) (*users.User, *utils.RestErr)
 	GetUser(int64) (*users.User, *utils.RestErr)
 	UpdateUser(string, users.User) (*users.User, *utils.RestErr)
+	DeleteUser(int64) *utils.RestErr
 }
 
 var UsersService usersServiceInterface = &usersService{}
@@ -73,4 +74,9 @@ func (s *usersService) UpdateUser(reqMethod string, user users.User) (*users.Use
 		return nil, err
 	}
 	return result, nil
+}
+
+func (s *usersService) DeleteUser(id int64) *utils.RestErr {
+	user := &users.User{Id: id}
+	return users.UsersDatabase.Delete(user.Id)
 }

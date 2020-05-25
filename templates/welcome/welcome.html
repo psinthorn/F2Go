@@ -1,43 +1,6 @@
-
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <!-- bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-
-    <style>
-        body {
-            min-height: 75rem;
-            padding-top: 4.5rem;
-        }
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
-    <title>{{.Title}}</title>
-</head>
-
+{{ template "layout-header.html" .}}
 <body>
-   {{ template "navbar.html" .}}
+{{ template "navbar.html" .}}
     <main role="main" class="container">
     {{ template "banner-top.html" .}}
         <div class="mt-5">
@@ -79,11 +42,6 @@
         </div>
         </div>
     </main>
-
-    {{ template "footer.html" .}}
-
-    <!-- bootstrap js dependencies -->
-    {{ template "footer-script.html" .}}
 </body>
 
-</html>
+{{ template "layout-footer.html" .}}

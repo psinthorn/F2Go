@@ -10,8 +10,10 @@ type User struct {
 	Id          int64  `json:"id"`
 	FirstName   string `json:"first_name"`
 	LastName    string `json:"last_name"`
+	Avatar      string `json:"avatar"`
 	Email       string `json:"email"`
-	Status      int    `json:"status"`
+	Password    string `json:"_"`
+	Status      string `json:"status"`
 	DateCreated string `json:""date_created`
 }
 

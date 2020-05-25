@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Render one of HTML, JSON or CSV based on the 'Accept' header of the request
-// If the header doesn't specify this, HTML is rendered, provided that
+// Render one of HTML, JSON or XML based on the 'Accept' header of the request
+// If the header doesn't specify, HTML is rendered
 // the template name is present
 func RenderRequest(c *gin.Context, data gin.H, templateName string) {
 
