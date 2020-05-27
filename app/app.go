@@ -19,8 +19,7 @@ func StartApp() {
 	// Get server port from port running selection configs
 	port := configs.Server.PortRunning("8089")
 	router.LoadHTMLGlob("templates/*/*.html")
-	router.Static("/assets/images", "./assets/images")
-	router.Static("/assets/css", "./assets/css")
+	router.Static("/assets/", "./assets/")
 	urlsMapping()
 	err := router.Run(":" + port)
 	if err != nil {
