@@ -14,6 +14,7 @@ type usersServiceInterface interface {
 	GetUser(int64) (*users.User, *utils.RestErr)
 	UpdateUser(string, users.User) (*users.User, *utils.RestErr)
 	DeleteUser(int64) *utils.RestErr
+	Search(string) ([]users.User, *utils.RestErr)
 }
 
 var UsersService usersServiceInterface = &usersService{}
@@ -22,6 +23,7 @@ func (s *usersService) CreateUser(user users.User) (*users.User, *utils.RestErr)
 	if err := user.Validate(); err != nil {
 		return nil, err
 	}
+
 	if err := user.Save(); err != nil {
 		return nil, err
 	}
@@ -42,8 +44,11 @@ func (s *usersService) UpdateUser(reqMethod string, user users.User) (*users.Use
 	//Get user by id from database
 	//Handle errors
 	//Update user
-	//return result
+	//return update result
+
+	//current user result
 	result, err := UsersService.GetUser(user.Id)
+
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +58,9 @@ func (s *usersService) UpdateUser(reqMethod string, user users.User) (*users.Use
 	case "PUT":
 		result.FirstName = user.FirstName
 		result.LastName = user.LastName
+		result.Avatar = user.Avatar
 		result.Email = user.Email
+		result.Password = user.Password
 		result.Status = user.Status
 	case "PATCH":
 		if user.FirstName != "" {
@@ -62,15 +69,21 @@ func (s *usersService) UpdateUser(reqMethod string, user users.User) (*users.Use
 		if user.LastName != "" {
 			result.LastName = user.LastName
 		}
+		if user.Avatar != "" {
+			result.Avatar = user.Avatar
+		}
 		if user.Email != "" {
 			result.Email = user.Email
 		}
-		if user.Status != result.Status {
+		// if user.Password != "" {
+		// 	result.Password = user.Password
+		// }
+		if user.Status != "" {
 			result.Status = user.Status
 		}
 	}
 
-	if err = users.UsersDatabase.Update(result); err != nil {
+	if err = result.Update(); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -78,5 +91,10 @@ func (s *usersService) UpdateUser(reqMethod string, user users.User) (*users.Use
 
 func (s *usersService) DeleteUser(id int64) *utils.RestErr {
 	user := &users.User{Id: id}
-	return users.UsersDatabase.Delete(user.Id)
+	return user.Delete()
+}
+
+func (s *usersService) Search(status string) ([]users.User, *utils.RestErr) {
+	dao := &users.User{}
+	return dao.FindUsersByStatus(status)
 }

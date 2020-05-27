@@ -6,8 +6,8 @@ import (
 
 func urlsMapping() {
 
+	//Public index page
 	router.GET("/about/:id", controllers.GetAbout)
-
 	router.GET("/contact/:id", controllers.GetContact)
 	router.GET("/welcome/:id", controllers.GetWelcome)
 	router.GET("/", controllers.GetIndex)
@@ -18,5 +18,6 @@ func urlsMapping() {
 	router.PUT("/users/:user_id", controllers.Update)
 	router.PATCH("/users/:user_id", controllers.Update)
 	router.DELETE("/users/:user_id", controllers.Delete)
+	router.GET("/internal/users/search", controllers.Search)
 
 }
