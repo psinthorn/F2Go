@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/psinthorn/F2Go/domain/users"
+	crypto_utils "github.com/psinthorn/F2Go/utils/crypto-utils"
+	date_utils "github.com/psinthorn/F2Go/utils/date-utils"
 	utils "github.com/psinthorn/F2Go/utils/errors"
 )
 
@@ -24,6 +26,9 @@ func (s *usersService) CreateUser(user users.User) (*users.User, *utils.RestErr)
 		return nil, err
 	}
 
+	user.Status = users.StatusActive
+	user.DateCreated = date_utils.GetNowDBFormat()
+	user.Password = crypto_utils.GetMd5(user.Password)
 	if err := user.Save(); err != nil {
 		return nil, err
 	}

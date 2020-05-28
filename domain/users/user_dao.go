@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/psinthorn/F2Go/datasources/mysql/users_db"
-	date_utils "github.com/psinthorn/F2Go/utils/date-utils"
 	utils "github.com/psinthorn/F2Go/utils/errors"
 	mysql_errors "github.com/psinthorn/F2Go/utils/mysql_utils"
 )
@@ -38,8 +37,6 @@ func (user *User) Save() *utils.RestErr {
 	//Close connection
 	defer stmt.Close()
 	//Statment Excute
-	user.Status = StatusActive
-	user.DateCreated = date_utils.GetNowDBFormat()
 	insertResult, err := stmt.Exec(user.FirstName, user.LastName, user.Avatar, user.Email, user.Password, user.Status, user.DateCreated)
 	//Excute errors handle
 	if err != nil {
