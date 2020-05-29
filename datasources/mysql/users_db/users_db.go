@@ -1,8 +1,6 @@
 package users_db
 
 import (
-	"fmt"
-	"log"
 	"os"
 
 	"database/sql"
@@ -28,25 +26,25 @@ var (
 
 func init() {
 
-	envPort := os.Getenv("PORT")
-	localPort := "8089"
+	// envPort := os.Getenv("PORT")
+	// localPort := "8089"
 
-	if envPort != localPort {
-		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8",
-			username, password, host, schema,
-		)
-		//fmt.Println(dataSourceName)
-		var err error
-		Client, err = sql.Open("mysql", dataSourceName)
-		if err != nil {
-			panic(err)
-		}
-		if err = Client.Ping(); err != nil {
-			panic(err)
-		}
-		log.Println("MySQL is successfully figured")
+	// if envPort != localPort {
+	// 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8",
+	// 		username, password, host, schema,
+	// 	)
+	// 	//fmt.Println(dataSourceName)
+	// 	var err error
+	// 	Client, err = sql.Open("mysql", dataSourceName)
+	// 	if err != nil {
+	// 		panic(err)
+	// 	}
+	// 	if err = Client.Ping(); err != nil {
+	// 		panic(err)
+	// 	}
+	// 	log.Println("MySQL is successfully figured")
 
-		return
-	}
+	// 	return
+	// }
 
 }
