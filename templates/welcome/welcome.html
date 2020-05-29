@@ -1,19 +1,22 @@
 {{ template "layout-header.html" .}}
 <body>
 {{ template "navbar.html" .}}
-    <main role="main" class="container">
-    {{ template "banner-top.html" .}}
-        <div class="mt-5">
-            <div class="jumbotron p-5">
+    <main role="main" class="container-fluid">
+        <div class="container mb-5">
+            {{ template "banner-top.html" .}}
+        </div>
+   
+        <div class="container-fluid mt-5 mb-5 bg-light">
+            <div class="container mt-5 mb-5 p-5 text-center bg-light  ">
                 {{ if .Status }}
-                <h1 class="text-center">{{.Title}}</h1>
+                <h1>{{.Title}}</h1>
                 <p class="lead">
                     {{.Body}}
                 </p>
                 {{end}}
                 <br />
                 <br>
-                <p class="lead text-center">
+                <p class="lead">
                     And we would like you to call us
                     <b>"Function To"</b>
                 </p>

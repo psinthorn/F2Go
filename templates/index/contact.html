@@ -1,81 +1,41 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+{{ template "layout-header.html" .}}
+<body>
+  {{ template "navbar.html" .}}
 
-    <!-- bootstrap 4 -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <style>
-      body {
-        min-height: 75rem;
-        padding-top: 4.5rem;
-      }
-
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    <title>F2 Contact</title>
-  </head>
-
-  <body>
-    {{ template "navbar.html" .}}
-
-    <main role="main" class="container">
+  <main role="main" class="container-fluid">
+    <div class="container mb-5">
       {{ template "banner-top.html" .}}
-      <div class="mt-5">
-        <div class="jumbotron">
-          {{ if .Status }}
-          <h1>{{.Title}}</h1>
-          <p class="lead"><br />{{.Body}}</p>
-          <p class="lead">
-            <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
-            <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
-            <br />Website:
-            <a href="{{.Website}}" target="_blank">{{.Website}}</a>
-            <br />Mobile:
-            <a href="tel:{{.Mobile}}" target="_blank">{{.Mobile}}</a>
-          </p>
+    </div>
+    <div class="container-fluid bg-light mt-5 mb-5">
+      <div class="container mt-5 mb-5 p-5 text-center">
+        {{ if .Status }}
+        <h1>{{.Title}}</h1>
+        <p class="lead"><br />{{.Body}}</p>
+        <p class="lead">
+          <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
+          <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
+          <br />Website:
+          <a href="{{.Website}}" target="_blank">{{.Website}}</a>
+          <!-- <br />Mobile:
+            <a href="tel:{{.Mobile}}" target="_blank">{{.Mobile}}</a> -->
+        </p>
 
-          <p class="lead"></p>
+        <p class="lead"></p>
 
-          <br />
-          <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
+        <br />
+        <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
             Email Me
           </a> -->
-          {{else}}
-          <h1>!Oops Nothing Here</h1>
-          <p class="mt-5">
-            <a class="btn btn-lg btn-primary" href="/" role="button">
-              Back to Start -> Welcome
-            </a>
-          </p>
-          {{end}}
-        </div>
+        {{else}}
+        <h1>!Oops Nothing Here</h1>
+        <p class="mt-5">
+          <a class="btn btn-lg btn-primary" href="/" role="button">
+            Back to Start -> Welcome
+          </a>
+        </p>
+        {{end}}
       </div>
-    </main>
-    {{ template "footer.html" .}}
-
-    <!-- bootstrap js dependencies -->
-    {{ template "footer-script.html" .}}
-  </body>
-</html>
+    </div>
+  </main>
+</body>
+{{ template "layout-footer.html" .}}

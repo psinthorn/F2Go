@@ -1,76 +1,36 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <!-- bootstrap 4 -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <style>
-      body {
-        min-height: 75rem;
-        padding-top: 4.5rem;
-      }
-
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    <title>{{.Title}}</title>
-  </head>
-
-  <body>
-    {{ template "navbar.html" .}}
-    <main role="main" class="container">
+{{ template "layout-header.html" .}}
+<body>
+  {{ template "navbar.html" .}}
+  <main role="main" class="container-fluid">
+    <div class="container mb-5">
       {{ template "banner-top.html" .}}
-      <div class="mt-5">
-        <div class="jumbotron">
-          {{ if .Status }}
-          <h1>{{.Title}}</h1>
-          <p class="lead">
-            {{.Body}}
-          </p>
-          <p class="lead">
-            {{.SubBody}}
-          </p>
-          <p class="mt-5 text-center">
-            <a class="btn btn-lg btn-primary" href="/contact/1" role="button">
-              Find out More on Our Service and Product
-            </a>
-          </p>
+    </div>
+    <div class="container-fluid bg-light mt-5 mb-5">
+      <div class="container mt-5 mb-5 p-5 text-center">
+        {{ if .Status }}
+        <h1>{{.Title}}</h1>
+        <p class="lead">
+          {{.Body}}
+        </p>
+        <p class="lead">
+          {{.SubBody}}
+        </p>
+        <p class="mt-5 text-center">
+          <a class="btn btn-lg btn-primary" href="/contact/1" role="button">
+            Find out More on Our Service and Product
+          </a>
+        </p>
 
-          {{else}}
-          <h1>!Oops Nothing Here</h1>
-          <p class="mt-5">
-            <a class="btn btn-lg btn-primary" href="/" role="button">
-              Back to Start -> Welcome
-            </a>
-          </p>
-          {{end}}
-        </div>
+        {{else}}
+        <h1>!Oops Nothing Here</h1>
+        <p class="mt-5">
+          <a class="btn btn-lg btn-primary" href="/" role="button">
+            Back to Start -> Welcome
+          </a>
+        </p>
+        {{end}}
       </div>
-    </main>
-    {{ template "footer.html" .}}
-
-    <!-- bootstrap js dependencies -->
-    {{ template "footer-script.html" .}}
-  </body>
-</html>
+    </div>
+  </main>
+</body>
+{{ template "layout-footer.html" .}}

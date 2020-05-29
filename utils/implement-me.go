@@ -2,11 +2,9 @@ package utils
 
 import (
 	"fmt"
-	"net/http"
 )
 
-func ImplemenftMe() string {
+func ImplemenftMe() {
 	fmt.Println("Implement Me")
-	c.HTML(http.StatusOK, "Implement Me")
 	return
 }
