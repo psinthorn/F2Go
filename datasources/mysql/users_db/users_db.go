@@ -8,6 +8,7 @@ import (
 	"database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/psinthorn/F2Go/configs"
 )
 
 const (
@@ -28,8 +29,7 @@ var (
 
 func init() {
 
-	envPort := os.Getenv("PORT")
-	fmt.Println(envPort)
+	envPort := configs.Server.PortRunning("8089")
 
 	switch envPort {
 	case "8089":
@@ -47,6 +47,5 @@ func init() {
 		}
 		log.Println("MySQL is successfully figured")
 		return
-
 	}
 }
