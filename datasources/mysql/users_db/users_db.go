@@ -29,8 +29,9 @@ var (
 func init() {
 
 	envPort := os.Getenv("PORT")
+	localPort := "8089"
 
-	if envPort != "" {
+	if envPort != localPort {
 		dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8",
 			username, password, host, schema,
 		)
