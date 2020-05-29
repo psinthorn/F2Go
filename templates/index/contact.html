@@ -1,41 +1,38 @@
 {{ template "layout-header.html" .}}
 <body>
   {{ template "navbar.html" .}}
-
-  <main role="main" class="container-fluid">
-    <div class="container mb-5">
-      {{ template "banner-top.html" .}}
-    </div>
-    <div class="container-fluid bg-light mt-5 mb-5">
-      <div class="container mt-5 mb-5 p-5 text-center">
-        {{ if .Status }}
-        <h1>{{.Title}}</h1>
-        <p class="lead"><br />{{.Body}}</p>
-        <p class="lead">
-          <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
-          <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
-          <br />Website:
-          <a href="{{.Website}}" target="_blank">{{.Website}}</a>
-          <!-- <br />Mobile:
+  <div class="container mb-5">
+    {{ template "banner-top.html" .}}
+  </div>
+  <div class="container-fluid bg-light mt-5 mb-5">
+    <div class="container mt-5 mb-5 p-5 text-center">
+      {{ if .Status }}
+      <h1>{{.Title}}</h1>
+      <p class="lead"><br />{{.Body}}</p>
+      <p class="lead">
+        <br />Email: {{.Email}} <br />Lind ID: {{.LineId}} <br />Facebook:
+        <a href="{{.Facebook}}" target="_blank">{{.Facebook}}</a>
+        <br />Website:
+        <a href="{{.Website}}" target="_blank">{{.Website}}</a>
+        <!-- <br />Mobile:
             <a href="tel:{{.Mobile}}" target="_blank">{{.Mobile}}</a> -->
-        </p>
+      </p>
 
-        <p class="lead"></p>
+      <p class="lead"></p>
 
-        <br />
-        <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
+      <br />
+      <!-- <a class="btn btn-lg btn-primary" href="/contact/email" role="button">
             Email Me
           </a> -->
-        {{else}}
-        <h1>!Oops Nothing Here</h1>
-        <p class="mt-5">
-          <a class="btn btn-lg btn-primary" href="/" role="button">
-            Back to Start -> Welcome
-          </a>
-        </p>
-        {{end}}
-      </div>
+      {{else}}
+      <h1>!Oops Nothing Here</h1>
+      <p class="mt-5">
+        <a class="btn btn-lg btn-primary" href="/" role="button">
+          Back to Start -> Welcome
+        </a>
+      </p>
+      {{end}}
     </div>
-  </main>
+  </div>
 </body>
 {{ template "layout-footer.html" .}}
