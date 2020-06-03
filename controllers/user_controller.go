@@ -57,12 +57,12 @@ func Get(c *gin.Context) {
 		return
 	}
 
-	result, appError := services.UsersService.GetUser(userId)
+	user, appError := services.UsersService.GetUser(userId)
 	if appError != nil {
 		c.JSON(appError.StatusCode, appError)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
 //Update user

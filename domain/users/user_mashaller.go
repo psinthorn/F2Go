@@ -1,29 +1,33 @@
 package users
 
-import "github.com/psinthorn/F2Go/utils"
+import "encoding/json"
 
-type Public struct {
+type PublicUser struct {
 	Id          int64  `json:"user_id"`
 	Status      string `json:"status"`
 	DateCreated string `json:"date_created`
 }
 
-type Private struct {
-	Id          int64  `json:"id"`
-	First_Name  string `json:"first_name`
-	Last_Name   string `json:"last_name"`
-	Email       string `json:"email"`
-	Password    string `json:"password:`
+type PrivateUser struct {
+	Id         int64  `json:"id"`
+	First_Name string `json:"first_name`
+	Last_Name  string `json:"last_name"`
+	//Email       string `json:"email"`
 	Status      string `json:"status"`
 	DateCreated string `json:"date_created`
 }
 
-func Mashal(isPubllic bool) Users {
-	utils.ImplemenftMe()
+func (user *User) Marshall(isPubllic bool) interface{} {
 	if isPubllic {
-		return nil
+		return PublicUser{
+			Id:          user.Id,
+			Status:      user.Status,
+			DateCreated: user.DateCreated,
+		}
 	}
-
 	//Return private
-	return nil
+	userJson, _ := json.Marshal(user)
+	var privateUser PrivateUser
+	json.Unmarshal(userJson, &privateUser)
+	return privateUser
 }
