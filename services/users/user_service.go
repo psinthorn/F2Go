@@ -19,7 +19,7 @@ type usersServiceInterface interface {
 	Search(string) ([]users.User, *utils.RestErr)
 }
 
-var UsersService usersServiceInterface = &usersService{}
+var UsersService usersService
 
 func (s *usersService) CreateUser(user users.User) (*users.User, *utils.RestErr) {
 	if err := user.Validate(); err != nil {
@@ -99,7 +99,7 @@ func (s *usersService) DeleteUser(id int64) *utils.RestErr {
 	return user.Delete()
 }
 
-func (s *usersService) Search(status string) ([]users.User, *utils.RestErr) {
+func (s *usersService) Search(status string) (users.Users, *utils.RestErr) {
 	dao := &users.User{}
 	return dao.FindUsersByStatus(status)
 }

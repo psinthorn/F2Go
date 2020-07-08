@@ -6,7 +6,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-
 	"github.com/psinthorn/F2Go/domain/users"
 	services "github.com/psinthorn/F2Go/services/users"
 	utils "github.com/psinthorn/F2Go/utils/errors"
@@ -46,7 +45,7 @@ func Create(c *gin.Context) {
 		return
 	}
 	//Return created user struct
-	c.JSON(http.StatusCreated, result)
+	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-Public") == "true"))
 }
 
 //Get user by id
@@ -93,7 +92,7 @@ func Update(c *gin.Context) {
 		c.JSON(appError.StatusCode, appError)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-Public") == "true"))
 
 }
 
@@ -120,5 +119,5 @@ func Search(c *gin.Context) {
 		c.JSON(err.StatusCode, err)
 		return
 	}
-	c.JSON(http.StatusOK, users)
+	c.JSON(http.StatusOK, users.Marshall(c.GetHeader("X-Public") == "true"))
 }
